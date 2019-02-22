@@ -16,12 +16,16 @@ require "sprockets/railtie"
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+Dotenv::Railtie.load
+
+HOSTNAME = ENV['HOSTNAME']
 
 module ActiveMeApp
   class Application < Rails::Application
+    config.autoload_paths << Rails.root.join('lib')
     config.generators.assets = false
     false
-        config.generators.helper = false
+    config.generators.helper = false
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
