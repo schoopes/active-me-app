@@ -1,33 +1,27 @@
-class Api::UsersController < ApplicationController
-
-  before_action :authenticate_user, only: :index
-
-  def profile
-    @user = current_user
-    render 'show.json.jbuilder'
-  end
-
+class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
-    render 'show.json.jbuilder'
+  end
+
+  def new
+    @users = User.all
   end
 
   def create
-    user = User.new(
+    @user = User.new(
       first_name: params[:first_name],
       last_name: params[:last_name],
       email: params[:email],
-      location: params[:location].strip,
+      location: params[:location],
       password: params[:password],
       password_confirmation: params[:password_confirmation]
     )
+    @user.save
+    redirect_to "/users/#{@product.id}"
+  end
 
-    if user.save
-      render json: {message: 'User created successfully'}, status: :created
-    else
-      render json: {errors: user.errors.full_messages}, status: :bad_request
-    end
-
+  def edit
+    @user = User.find(params[:id])
   end
 
   def update
@@ -38,18 +32,14 @@ class Api::UsersController < ApplicationController
     @user.location = params[:location] || @user.location
     @user.password = params[:password] || @user.password
 
-    if @user.save
-      render 'show.json.jbuilder', status: :created
-    else
-      render json: {errors: @user.errors.full_messages}, status: :bad_request
-    end
-
+    @user.save
+    redirect to "/users/#{@user.id}"
   end
 
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    render json: {message: "User deleted."}
+    redirect to "/users/new"
   end
 
 end

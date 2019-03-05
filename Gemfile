@@ -58,4 +58,4 @@ gem 'jwt'
 
 gem 'figaro'
 
-gem 'volunteermatch'
+gem 'rack-cors', require: 'rack/cors'
