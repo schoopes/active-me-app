@@ -15,6 +15,9 @@ Rails.application.routes.draw do
 
     get "/eventful" => "eventful#index"
 
+    get "/google/authorize" => "google#google_authorize"
+    get "/google/callback" => "google#google_callback"
+
   end
 
   get "/users/:id" => "users#show"
