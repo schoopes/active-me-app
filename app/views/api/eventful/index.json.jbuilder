@@ -6,6 +6,6 @@ json.array! @events.each do |event|
   json.venue event["venue_name"]
   json.address event["venue_address"]
   json.when event["start_time"]
-  json.description event["description"]
+  json.description event["description"].gsub(/<\/?[^>]+>/, "")
   json.eventful_url event["venue_url"]
 end

@@ -6,6 +6,8 @@ class Api::GoogleController < ApplicationController
 
   def google_callback
     auth_code = params[:code]
+
+    # GET ACCESS TOKEN
     response = HTTP.post("https://www.googleapis.com/oauth2/v4/token",
       form: {
         grant_type: "authorization_code",
@@ -15,7 +17,13 @@ class Api::GoogleController < ApplicationController
         client_secret: ENV["CLIENT_SECRET"]
       })
     access_token = response.parse["access_token"]
+
+    # GET CALENDAR ID
     response = HTTP.auth("Bearer #{access_token}").get("https://www.googleapis.com/calendar/v3/users/me/calendarList")
+    calendar_id = response.parse["items"][0]["id"]
+
+    # GET INDIVIDUAL EVENTS BASED ON CALENDAR ID
+    response = HTTP.auth("Bearer #{access_token}").get("https://www.googleapis.com/calendar/v3/calendars/#{calendar_id}/events")
     render json: response.parse
 
   end
