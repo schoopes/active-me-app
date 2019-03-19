@@ -11,7 +11,8 @@ Rails.application.routes.draw do
 
     get "/favorites" => "favorites#index"
     post "/favorites" => "favorites#create"
-    delete "/favorites/:id" => "favorites#destroy"
+    get "/favorites/:eventful_id" => "favorites#attendees"
+    delete "/favorites/:eventful_id" => "favorites#destroy"
 
     get "/eventful" => "eventful#index"
 
@@ -20,10 +21,7 @@ Rails.application.routes.draw do
 
   end
 
-  get "/users/:id" => "users#show"
-  get "/users/new" => "users#new"
-  post "/users" => "users#create"
-  get "/users/:id/edit" => "users#edit"
-  delete "/users/:id" => "users#destroy"
+  get "/*path" => proc { [200, {}, [ActionView::Base.new.render(file: 'public/index.html')]] }
 
 end
+
