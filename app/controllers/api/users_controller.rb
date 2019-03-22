@@ -1,6 +1,6 @@
 class Api::UsersController < ApplicationController
 
-  before_action :authenticate_user, only: :index
+  before_action :authenticate_user
 
   def profile
     @user = current_user
@@ -31,7 +31,7 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = current_user
     @user.first_name = params[:first_name] || @user.first_name
     @user.last_name = params[:last_name] || @user.last_name
     @user.email = params[:email] || @user.email
@@ -47,7 +47,7 @@ class Api::UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
+    @user = current_user
     @user.destroy
     render json: {message: "User deleted."}
   end
