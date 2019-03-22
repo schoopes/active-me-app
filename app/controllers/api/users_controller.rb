@@ -1,6 +1,6 @@
 class Api::UsersController < ApplicationController
 
-  before_action :authenticate_user
+  before_action :authenticate_user, except: :create
 
   def profile
     @user = current_user

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     get "/sendgrid/test" => "sendgrid#test"
-    get "/sendgrid/confirmation" => "sendgrid#confirmation"
+    post "/sendgrid/confirmation" => "sendgrid#confirmation"
 
     get "/users/me" => "users#profile"
     get "/users/:id" => "users#show"
