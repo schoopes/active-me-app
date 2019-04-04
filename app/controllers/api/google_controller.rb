@@ -1,6 +1,6 @@
 class Api::GoogleController < ApplicationController
 
-  require 'securerandom'
+  # require 'securerandom'
 
   # def google_authorize
   #   state = SecureRandom.hex
