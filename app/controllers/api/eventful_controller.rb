@@ -10,6 +10,7 @@ class Api::EventfulController < ApplicationController
     @events = parsed_response["events"]["event"]
 
     render 'index.json.jbuilder'
+    
   end
 
 end
