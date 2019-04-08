@@ -15,7 +15,7 @@ class Api::GoogleController < ApplicationController
       form: {
         grant_type: "authorization_code",
         code: auth_code,
-        redirect_uri: "http://localhost:3000/google/callback",
+        redirect_uri: "https://rocky-brook-99836.herokuapp.com/google/callback",
         client_id: "172210505146-cglcauiuv08b1rae1pe7a4o4psobdgr6.apps.googleusercontent.com",
         client_secret: ENV["CLIENT_SECRET"]
       })
